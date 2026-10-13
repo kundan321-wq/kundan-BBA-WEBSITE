@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kundan Kumar - Student Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2ff;
+    color: #222;
+}
+
+header {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+}
+
+header h1 {
+    margin-bottom: 8px;
+}
+
+.container {
+    width: 92%;
+    max-width: 850px;
+    margin: 25px auto;
+}
+
+.card {
+    background: white;
+    padding: 18px;
+    margin-bottom: 16px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px #00000012;
+}
+
+.main-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 9px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+}
+
+.main-btn:hover {
+    background: #1d4ed8;
+}
+
+.submenu {
+    display: none;
+    padding: 12px 0 0 15px;
+}
+
+.sub-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 7px;
+    background: #dbeafe;
+    color: #1e3a8a;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.sub-btn:hover {
+    background: #bfdbfe;
+}
+
+.nested {
+    display: none;
+    padding-left: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 11px 16px;
+    margin: 5px 0;
+    background: #16a34a;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background: #15803d;
+}
+
+#message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    background: #172554;
+    color: white;
+    padding: 18px;
+    margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎓 Kundan Kumar</h1>
+    <p>BBA First Year Student</p>
+    <p>Welcome to My Student Dashboard</p>
+</header>
+
+<div class="container">
+
+    <!-- HOME -->
+    <div class="card">
+        <button class="main-btn"
+        onclick="toggleMenu('homeMenu')">
+        🏠 Home ▼
+        </button>
+
+        <div class="submenu" id="homeMenu">
+            <button class="sub-btn"
+            onclick="showMessage('Welcome to my website!')">
+            🏡 Welcome
+            </button>
+
+            <button class="sub-btn"
+            onclick="showMessage('Website created by Kundan Kumar.')">
+            👨‍🎓 About Me
+            </button>
+        </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="card">
+        <button class="main-btn"
+        onclick="toggleMenu('docsMenu')">
+        📂 Documents & PDF ▼
+        </button>
+
+        <div class="submenu" id="docsMenu">
+
+            <button class="sub-btn"
+            onclick="toggleMenu('pdfMenu')">
+            📄 PDF Options +
+            </button>
+
+            <div class="nested" id="pdfMenu">
+
+                <label>Select a PDF file:</label>
+                <input type="file" id="pdfFile"
+                accept=".pdf,application/pdf">
+
+                <button class="action-btn"
+                onclick="openPDF()">
+                Open PDF
+                </button>
+
+                <button class="action-btn"
+                onclick="downloadPDF()">
+                Download PDF
+                </button>
+
+            </div>
+
+            <button class="sub-btn"
+            onclick="toggleMenu('uploadMenu')">
+            ⬆️ Upload Options +
+            </button>
+
+            <div class="nested" id="uploadMenu">
+                <p>Select a file on your device.</p>
+                <input type="file" id="uploadFile"
+                accept=".pdf">
+
+                <p id="uploadMessage"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ONLINE DRIVE -->
+    <div class="card">
+        <button class="main-btn"
+        onclick="toggleMenu('driveMenu')">
+        ☁️ Online Drive ▼
+        </button>
+
+        <div class="submenu" id="driveMenu">
+
+            <button class="sub-btn"
+            onclick="toggleMenu('googleDriveMenu')">
+            📁 Google Drive Options +
+            </button>
+
+            <div class="nested" id="googleDriveMenu">
+                <a class="action-btn"
+                href="https://drive.google.com/"
+                target="_blank" rel="noopener noreferrer">
+                Open Google Drive
+                </a>
+
+                <a class="action-btn"
+                href="https://drive.google.com/drive/my-drive"
+                target="_blank" rel="noopener noreferrer">
+                My Drive
+                </a>
+            </div>
+
+            <button class="sub-btn"
+            onclick="showMessage('Files selected on your device are not automatically uploaded to an online drive.')">
+            💾 My Files Information
+            </button>
+
+        </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="card">
+        <button class="main-btn"
+        onclick="toggleMenu('emailMenu')">
+        📧 Email Options ▼
+        </button>
+
+        <div class="submenu" id="emailMenu">
+
+            <button class="sub-btn"
+            onclick="toggleMenu('gmailMenu')">
+            ✉️ Gmail Options +
+            </button>
+
+            <div class="nested" id="gmailMenu">
+
+                <a class="action-btn"
+                href="https://mail.google.com/"
+                target="_blank" rel="noopener noreferrer">
+                Open Gmail
+                </a>
+
+                <button class="action-btn"
+                onclick="toggleMenu('sendEmailMenu')">
+                Compose Email
+                </button>
+
+                <div class="nested" id="sendEmailMenu">
+                    <input type="email" id="recipient"
+                    placeholder="Recipient Email">
+
+                    <input type="text" id="emailSubject"
+                    placeholder="Email Subject">
+
+                    <input type="text" id="emailBody"
+                    placeholder="Write your message">
+
+                    <button class="action-btn"
+                    onclick="composeEmail()">
+                    Create Email
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="card">
+        <button class="main-btn"
+        onclick="toggleMenu('loginMenu')">
+        🔐 Login / Sign Up ▼
+        </button>
+
+        <div class="submenu" id="loginMenu">
+
+            <h3>Student Login</h3>
+
+            <form onsubmit="loginDemo(event)">
+                <input type="text" id="username"
+                placeholder="Enter Username"
+                autocomplete="username" required>
+
+                <input type="password" id="password"
+                placeholder="Enter Password"
+                autocomplete="current-password" required>
+
+                <button type="submit" class="action-btn">
+                Login
+                </button>
+            </form>
+
+            <p id="message"></p>
+
+            <p>
+                Note: This is a demo login.
+                It does not create or verify real accounts.
+            </p>
+
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Kundan Kumar | Student Dashboard</p>
+</footer>
+
+<script>
+function toggleMenu(id) {
+    const menu = document.getElementById(id);
+
+    if (!menu) return;
+
+    menu.style.display =
+        menu.style.display === "block" ? "none" : "block";
+}
+
+function showMessage(text) {
+    document.getElementById("message").textContent = text;
+    alert(text);
+}
+
+function openPDF() {
+    const file = document.getElementById("pdfFile").files[0];
+
+    if (!file) {
+        alert("Please select a PDF file first.");
+        return;
+    }
+
+    if (file.type !== "application/pdf") {
+        alert("Please select a valid PDF file.");
+        return;
+    }
+
+    const url = URL.createObjectURL(file);
+    window.open(url, "_blank", "noopener");
+}
+
+function downloadPDF() {
+    const file = document.getElementById("pdfFile").files[0];
+
+    if (!file) {
+        alert("Please select a PDF file first.");
+        return;
+    }
+
+    if (file.type !== "application/pdf") {
+        alert("Please select a valid PDF file.");
+        return;
+    }
+
+    const url = URL.createObjectURL(file);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function composeEmail() {
+    const recipient =
+        document.getElementById("recipient").value.trim();
+
+    const subject =
+        document.getElementById("emailSubject").value.trim();
+
+    const body =
+        document.getElementById("emailBody").value.trim();
+
+    if (recipient && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    const mailto =
+        "mailto:" + encodeURIComponent(recipient) +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+    window.location.href = mailto;
+}
+
+function loginDemo(event) {
+    event.preventDefault();
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    document.getElementById("message").textContent =
+        "Demo only: " + username +
+        ", the login form works, but real authentication needs a secure backend.";
+}
+</script>
+
+</body>
+</html>
